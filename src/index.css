@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("./assets/bricolage_grotesque.ttf") format("truetype");
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./assets/plus_jakarta_sans.ttf") format("truetype");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+/* Token warna = theme/Colors.kt */
+@theme {
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+
+  --color-paper: #fbf5ec;
+  --color-paper2: #f5ece0;
+  --color-paper3: #ebdfcd;
+  --color-line: #ebe0d1;
+
+  --color-ink: #26180f;
+  --color-ink2: #5a483b;
+  --color-muted: #8b7b6d;
+  --color-espresso: #2a1a10;
+  --color-espresso2: #3b261a;
+
+  --color-brand-50: #fff5ec;
+  --color-brand-100: #ffe6d0;
+  --color-brand-200: #ffcb9c;
+  --color-brand-300: #ffa762;
+  --color-brand-400: #f88a2e;
+  --color-brand-500: #e36b0f;
+  --color-brand-600: #c75a08;
+  --color-brand-700: #8f4208;
+  --color-brand-800: #5f2c06;
+
+  --color-butter-100: #fdf0c4;
+  --color-butter-400: #f7c948;
+  --color-butter-700: #7a5a00;
+  --color-leaf-100: #dcf2e4;
+  --color-leaf-500: #1f7a4d;
+  --color-leaf-600: #17623d;
+  --color-danger-100: #fbe2df;
+  --color-danger-500: #c1352b;
+  --color-tide-100: #dcebf4;
+  --color-tide-600: #2a6385;
+  --color-plum-100: #f1dceb;
+  --color-plum-600: #7a3e6b;
+}
+
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  margin: 0;
+  background: #1f140d;
+  color: var(--color-ink);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bayangan = Modifier.cardShadow / popShadow / brandShadow */
+.sh-card {
+  box-shadow: 0 8px 20px -6px rgba(42, 26, 16, 0.2), 0 1px 3px rgba(42, 26, 16, 0.06);
+}
+.sh-pop {
+  box-shadow: 0 22px 40px -10px rgba(42, 26, 16, 0.5), 0 4px 12px rgba(42, 26, 16, 0.16);
+}
+.sh-brand {
+  box-shadow: 0 10px 22px -6px rgba(227, 107, 15, 0.62), 0 2px 6px rgba(227, 107, 15, 0.3);
+}
+.sh-glow {
+  box-shadow: 0 0 0 1px rgba(255, 203, 156, 0.2), 0 3px 18px 6px rgba(255, 203, 156, 0.35);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 0.9s linear infinite; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.floaty { animation: floaty 2.5s ease-in-out infinite; }
+
+@keyframes pulse-skel {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.skel { animation: pulse-skel 0.7s ease-in-out infinite alternate; }
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(300%); }
+}
+@keyframes ring {
+  from { transform: scale(1); opacity: 0.55; }
+  to { transform: scale(1.55); opacity: 0; }
+}
+@keyframes slidein {
+  from { opacity: 0; transform: translateX(20%); }
+  to { opacity: 1; transform: none; }
+}
+.slidein { animation: slidein 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
