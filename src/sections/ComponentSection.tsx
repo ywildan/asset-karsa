@@ -309,7 +309,7 @@ export function ComponentSection() {
           </div>
         </Spec>
 
-        <Spec title="Kondisi kosong, skeleton & hero" spec="EmptyState · Skeleton (denyut 0,7 dtk) · kartu berpola Kawung" className="lg:col-span-2">
+        <Spec title="Kondisi kosong, skeleton & hero" spec="EmptyState · Skeleton (denyut 0,7 dtk) · kartu berpola batik Truntum" className="lg:col-span-2">
           <div className="grid gap-4 md:grid-cols-3">
             <div className="flex flex-col items-center rounded-[28px] border border-ink/5 bg-paper px-5 py-8 text-center">
               <div className="flex size-16 items-center justify-center rounded-full bg-brand-100 text-brand-600">
@@ -347,7 +347,7 @@ export function ComponentSection() {
                   Grup kelas SI-4B
                 </div>
                 <div className="mt-1 text-white/85" style={s(12.5, 400, 1.5)}>
-                  Kartu hero dengan KawungPattern.
+                  Kartu hero dengan pola batik Truntum.
                 </div>
                 <div className="mt-3 flex items-center gap-1.5 text-white/90" style={s(12, 600, 1.2)}>
                   <Zap size={14} /> 28 poin

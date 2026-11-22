@@ -38,13 +38,13 @@ background-size: ${tile}px ${tile}px;`;
   const maskStyle = fade ? { maskImage: "radial-gradient(circle at 50% 45%, #000 0, transparent 77%)", WebkitMaskImage: "radial-gradient(circle at 50% 45%, #000 0, transparent 77%)" } : undefined;
 
   return (
-    <Section id="pola" no="05" title="Pola Kawung" desc="Motif empat elips di tiap ubin 44 dp, dipakai di header, splash, dan kartu. Atur warna, kerapatan, dan ukuran ubin, lalu ekspor.">
+    <Section id="pola" no="05" title="Pola Batik Truntum" desc="Motif batik Truntum: bunga bintang kecil selang-seling di tiap ubin 44 dp, dipakai di header, splash, dan kartu. Atur warna, kerapatan, dan ukuran ubin, lalu ekspor.">
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
         <div className="sh-card overflow-hidden rounded-[28px] border border-ink/5 bg-white p-2">
           <div className="relative aspect-[16/10] overflow-hidden rounded-3xl sm:aspect-[16/9]" style={{ background: transparent ? "repeating-conic-gradient(#EBDFCD 0% 25%, #FBF5EC 0% 50%) 0 0/20px 20px" : bg }}>
             <div className="absolute inset-0" style={{ backgroundImage: kawungTileUri(ink, alpha), backgroundSize: `${tile}px ${tile}px`, ...maskStyle }} />
             <div className="relative flex h-full flex-col justify-end p-6 sm:p-8" style={{ color: ink }}>
-              <div style={s(11, 700, 1.4, 0.16)}>MOTIF KAWUNG</div>
+              <div style={s(11, 700, 1.4, 0.16)}>BATIK TRUNTUM</div>
               <div style={d(34, 800, 1, -0.02)}>SiKarsa</div>
             </div>
           </div>
@@ -119,8 +119,8 @@ background-size: ${tile}px ${tile}px;`;
           <div className="mt-5 grid grid-cols-2 gap-2">
             <button
               onClick={() => {
-                downloadBlob("karsa-kawung.svg", svg, "image/svg+xml");
-                show("karsa-kawung.svg diunduh");
+                downloadBlob("karsa-truntum.svg", svg, "image/svg+xml");
+                show("karsa-truntum.svg diunduh");
               }}
               className="sh-brand flex h-11 items-center justify-center gap-2 rounded-2xl bg-brand-500 text-white transition hover:bg-brand-600 active:scale-[0.98]"
               style={s(13.5, 600, 1.2)}
@@ -131,8 +131,8 @@ background-size: ${tile}px ${tile}px;`;
               onClick={async () => {
                 try {
                   const blob = await svgToPng(svg, 1920);
-                  downloadBlob("karsa-kawung.png", blob, "image/png");
-                  show("karsa-kawung.png diunduh");
+                  downloadBlob("karsa-truntum.png", blob, "image/png");
+                  show("karsa-truntum.png diunduh");
                 } catch {
                   show("Gagal membuat PNG", "error");
                 }

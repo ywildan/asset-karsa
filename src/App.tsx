@@ -16,7 +16,7 @@ const NAV: [string, string][] = [
   ["warna", "Warna"],
   ["tipografi", "Tipografi"],
   ["ikon", "Ikon"],
-  ["pola", "Pola Kawung"],
+  ["pola", "Pola Batik"],
   ["komponen", "Komponen"],
   ["bentuk", "Bentuk"],
   ["ekspor", "Ekspor"],

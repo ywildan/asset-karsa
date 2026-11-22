@@ -33,9 +33,43 @@ export function wordmarkSvg({ ink = "#26180F", tile = "#E36B0F", mark = "#FFFFFF
   return `<svg width="220" height="56" viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 4)">${inner}</g><text x="60" y="38" font-family="Bricolage Grotesque, system-ui, sans-serif" font-size="32" font-weight="800" letter-spacing="-0.64" fill="${ink}">SiKarsa</text></svg>`;
 }
 
-/** Ubin motif Kawung 44×44 (KawungPattern di Common.kt) */
+/** Titik-titik bintang 8 sudut Truntum (4 sudut panjang di sumbu, 4 sudut pendek di diagonal) */
+export function truntumStarPoints(cx: number, cy: number) {
+  const pts: string[] = [];
+  for (let i = 0; i < 16; i++) {
+    const a = (i * Math.PI) / 8 - Math.PI / 2;
+    const r = i % 4 === 0 ? 10 : i % 2 === 0 ? 6.4 : 2.6;
+    pts.push(`${+(cx + r * Math.cos(a)).toFixed(2)},${+(cy + r * Math.sin(a)).toFixed(2)}`);
+  }
+  return pts.join(" ");
+}
+
+/** Posisi bunga & titik pengisi dalam satu ubin 44×44 (susunan selang-seling) */
+export const TRUNTUM_STARS: [number, number][] = [
+  [22, 22],
+  [0, 0],
+  [44, 0],
+  [0, 44],
+  [44, 44],
+];
+export const TRUNTUM_DOTS: [number, number][] = [
+  [11, 11],
+  [33, 11],
+  [11, 33],
+  [33, 33],
+  [22, 5],
+  [22, 39],
+  [5, 22],
+  [39, 22],
+];
+
+/** Ubin motif batik Truntum 44×44 (menggantikan Kawung) */
 export function kawungTileInner(color: string, alpha: number) {
-  return `<g fill="none" stroke="${color}" stroke-opacity="${alpha}" stroke-width="1.2"><ellipse cx="22" cy="22" rx="6" ry="11"/><ellipse cx="22" cy="33" rx="6" ry="11"/><ellipse cx="22" cy="22" rx="11" ry="6"/><ellipse cx="33" cy="22" rx="11" ry="6"/></g><circle cx="22" cy="22" r="1.8" fill="${color}" fill-opacity="${Math.min(1, alpha * 1.4)}"/>`;
+  const stars = TRUNTUM_STARS.map(
+    ([x, y]) => `<polygon points="${truntumStarPoints(x, y)}"/><circle cx="${x}" cy="${y}" r="1.4" fill="${color}" fill-opacity="${Math.min(1, alpha * 1.4)}" stroke="none"/>`,
+  ).join("");
+  const dots = TRUNTUM_DOTS.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.1"/>`).join("");
+  return `<g fill="none" stroke="${color}" stroke-opacity="${alpha}" stroke-width="1.2" stroke-linejoin="round">${stars}</g><g fill="${color}" fill-opacity="${Math.min(1, alpha * 1.2)}">${dots}</g>`;
 }
 
 /** Satu ubin sebagai data-URI, dipakai sebagai background-image */
@@ -61,7 +95,7 @@ export function kawungFileSvg({
   bg: string | null;
 }) {
   const sc = tile / 44;
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="kawung" width="${tile}" height="${tile}" patternUnits="userSpaceOnUse"><g transform="scale(${sc})">${kawungTileInner(color, alpha)}</g></pattern></defs>${bg ? `<rect width="${w}" height="${h}" fill="${bg}"/>` : ""}<rect width="${w}" height="${h}" fill="url(#kawung)"/></svg>`;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="kawung" width="${tile}" height="${tile}" patternUnits="userSpaceOnUse"><g transform="scale(${sc})">${kawungTileInner(color, alpha)}</g></pattern></defs>${bg ? `<rect width="${w}" height="${h}" fill="${bg}"/>` : ""}<rect width="${w}" height="${h}" fill="url(#batik)"/></svg>`;
 }
 
 export const svgInline = (svg: string) => ({ __html: svg });

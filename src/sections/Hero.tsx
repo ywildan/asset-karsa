@@ -35,7 +35,7 @@ export function Hero() {
             Karsa<span className="text-espresso">.</span>
           </h1>
           <p className="mt-6 max-w-xl text-white/90" style={s(17, 400, 1.65)}>
-            Satu tempat untuk seluruh bahan visual aplikasi SiKarsa: logo, palet kertas-oranye, tipografi, ikon, pola Kawung, dan komponen. Klik untuk menyalin, atau unduh siap pakai.
+            Satu tempat untuk seluruh bahan visual aplikasi SiKarsa: logo, palet kertas-oranye, tipografi, ikon, pola batik Truntum, dan komponen. Klik untuk menyalin, atau unduh siap pakai.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a href="#logo">
@@ -92,7 +92,7 @@ export function Hero() {
           </div>
           <div className="floaty sh-card absolute bottom-6 right-6 flex items-center gap-2 rounded-full bg-brand-100 px-4 py-3 text-brand-700" style={{ animationDelay: "0.4s" }}>
             <Layers size={18} />
-            <span style={s(12.5, 700, 1.2)}>Kawung</span>
+            <span style={s(12.5, 700, 1.2)}>Batik</span>
           </div>
         </div>
       </div>
