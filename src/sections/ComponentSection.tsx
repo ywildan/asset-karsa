@@ -30,41 +30,54 @@ type Tab = "lib" | "grup" | "input" | "aktivitas" | "poinku" | "akun";
 const TAB_META: Record<Tab, { label: string; Icon: typeof BookOpen }> = {
   lib: { label: "Karsa Lib", Icon: BookOpen },
   grup: { label: "Grup", Icon: MessagesSquare },
-  input: { label: "Input", Icon: PenLine },
+  input: { label: "Input poin", Icon: PenLine },
   aktivitas: { label: "Aktivitas", Icon: Activity },
   poinku: { label: "Poinku", Icon: Trophy },
   akun: { label: "Akun", Icon: UserRound },
 };
 function Dock({ tabs, active, onChange }: { tabs: Tab[]; active: Tab; onChange: (t: Tab) => void }) {
+  const hasInput = tabs.includes("input");
+  const side = tabs.filter((t) => t !== "input");
+  // slot kosong 76dp menjaga tab kiri-kanan tetap seimbang mengelilingi tombol tengah
+  const spacerAfter = !hasInput ? -1 : side.length >= 4 ? 1 : 0;
   return (
-    <div className="sh-pop flex h-[82px] items-end rounded-full bg-espresso px-3 pb-3">
-      {tabs.map((t) => {
-        const { label, Icon } = TAB_META[t];
-        if (t === "input") {
+    <div className="relative">
+      <div className="sh-pop flex h-[82px] items-center rounded-full bg-espresso px-[18px]">
+        {side.map((t, i) => {
+          const { label, Icon } = TAB_META[t];
+          const on = active === t;
           return (
-            <div key={t} className="flex flex-1 flex-col items-center justify-end">
+            <div key={t} className="contents">
               <button
                 onClick={() => onChange(t)}
                 aria-label={label}
-                className={cn("sh-brand -mt-6 mb-0 flex size-[60px] items-center justify-center rounded-full border-4 border-paper text-white transition active:scale-90", active === t ? "bg-brand-400" : "bg-brand-500")}
+                className={cn("flex h-full flex-1 items-center justify-center", on ? "text-white" : "text-white/55")}
               >
-                <Icon size={26} />
+                <span className={cn("flex h-9 w-16 items-center justify-center rounded-[18px] transition active:scale-[.94]", on ? "bg-brand-500" : "")}>
+                  <Icon size={26} strokeWidth={2} />
+                </span>
               </button>
+              {i === spacerAfter && <div className="w-[76px] shrink-0" />}
             </div>
           );
-        }
-        const on = active === t;
-        return (
-          <button key={t} onClick={() => onChange(t)} className="flex flex-1 flex-col items-center justify-end">
-            <span className={cn("flex h-9 w-14 items-center justify-center rounded-[18px] transition-colors", on ? "bg-brand-500 text-white" : "text-white/55")}>
-              <Icon size={22} />
-            </span>
-            <span className={cn("mt-1 whitespace-nowrap", on ? "text-white" : "text-white/55")} style={s(10.5, 500, 1.2)}>
-              {label}
-            </span>
+        })}
+      </div>
+      {hasInput && (
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <button
+            onClick={() => onChange("input")}
+            aria-label={TAB_META.input.label}
+            className="pointer-events-auto relative flex size-[68px] items-center justify-center rounded-full bg-brand-500 text-white transition active:scale-[.94]"
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-1/2 size-[98px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{ background: "radial-gradient(closest-side, rgba(227,107,15,.55), transparent)" }}
+            />
+            <PenLine size={30} strokeWidth={2.2} className="relative" />
           </button>
-        );
-      })}
+        </div>
+      )}
     </div>
   );
 }
@@ -84,7 +97,7 @@ function DockDemo() {
           { value: "mhs", label: "Mahasiswa · 4 tab" },
         ]}
       />
-      <div className="mx-auto mt-5 max-w-[420px] rounded-[28px] bg-paper px-3 pb-5 pt-10">
+      <div className="mx-auto mt-5 max-w-[420px] rounded-[28px] bg-paper px-3 py-6">
         <Dock tabs={tabs} active={cur} onChange={setActive} />
       </div>
     </div>
@@ -292,7 +305,7 @@ export function ComponentSection() {
             </div>
           </Spec>
 
-          <Spec title="Dock navigasi" spec="Pil Espresso 82dp · tombol tengah bila punya hak mencatat poin · klik tab">
+          <Spec title="Dock navigasi" spec="Pil Espresso 82dp · ikon saja · tombol tengah 68dp bila punya hak mencatat poin · klik tab">
             <DockDemo />
           </Spec>
         </div>
