@@ -1,19 +1,6 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Bricolage Grotesque";
-  src: url("./assets/bricolage_grotesque.ttf") format("truetype");
-  font-weight: 200 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  src: url("./assets/plus_jakarta_sans.ttf") format("truetype");
-  font-weight: 200 800;
-  font-display: swap;
-}
-
-/* Token warna = theme/Colors.kt */
+/* Token warna = theme/Colors.kt aplikasi SiKarsa */
 @theme {
   --font-display: "Bricolage Grotesque", system-ui, sans-serif;
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -56,11 +43,20 @@
 html {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0;
-  background: #1f140d;
+  background: var(--color-paper);
   color: var(--color-ink);
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-brand-800);
 }
 
 .no-scrollbar {
@@ -88,7 +84,7 @@ body {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
 }
-.rise { animation: rise 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+.rise { animation: rise 0.5s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin { animation: spin 0.9s linear infinite; }
@@ -97,24 +93,50 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-.floaty { animation: floaty 2.5s ease-in-out infinite; }
+.floaty { animation: floaty 3s ease-in-out infinite; }
+
+@keyframes ring {
+  from { transform: scale(1); opacity: 0.55; }
+  to { transform: scale(1.7); opacity: 0; }
+}
+.ring { animation: ring 2.4s ease-out infinite; }
 
 @keyframes pulse-skel {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
 }
-.skel { animation: pulse-skel 0.7s ease-in-out infinite alternate; }
+.skel { animation: pulse-skel 0.8s ease-in-out infinite alternate; }
 
-@keyframes shimmer {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(300%); }
+@keyframes toast-in {
+  from { opacity: 0; transform: translate(-50%, 16px) scale(0.96); }
+  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
 }
-@keyframes ring {
-  from { transform: scale(1); opacity: 0.55; }
-  to { transform: scale(1.55); opacity: 0; }
+.toast-in { animation: toast-in 0.28s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+
+/* Slider bergaya Karsa */
+input[type="range"].karsa-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-paper3);
+  outline: none;
+  width: 100%;
 }
-@keyframes slidein {
-  from { opacity: 0; transform: translateX(20%); }
-  to { opacity: 1; transform: none; }
+input[type="range"].karsa-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--color-brand-500);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(227, 107, 15, 0.5);
 }
-.slidein { animation: slidein 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+input[type="range"].karsa-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--color-brand-500);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(227, 107, 15, 0.5);
+}
