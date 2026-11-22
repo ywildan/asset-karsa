@@ -95,7 +95,7 @@ export function kawungFileSvg({
   bg: string | null;
 }) {
   const sc = tile / 44;
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="kawung" width="${tile}" height="${tile}" patternUnits="userSpaceOnUse"><g transform="scale(${sc})">${kawungTileInner(color, alpha)}</g></pattern></defs>${bg ? `<rect width="${w}" height="${h}" fill="${bg}"/>` : ""}<rect width="${w}" height="${h}" fill="url(#batik)"/></svg>`;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="batik" width="${tile}" height="${tile}" patternUnits="userSpaceOnUse"><g transform="scale(${sc})">${kawungTileInner(color, alpha)}</g></pattern></defs>${bg ? `<rect width="${w}" height="${h}" fill="${bg}"/>` : ""}<rect width="${w}" height="${h}" fill="url(#batik)"/></svg>`;
 }
 
 export const svgInline = (svg: string) => ({ __html: svg });
